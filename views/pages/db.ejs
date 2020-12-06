@@ -11,7 +11,14 @@
 <ul>
   Hello there!
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
+        <li>
+            <%= r.title_id %> - 
+            <%= r.title_name %> -
+            <%= r.genre_id %> - 
+            <%= r.media_type_tv %> - 
+            <%= r.media_type_film %> - 
+            <%= r.media_type_other %>
+          </li>
     <% }); %>
 </ul>
 
