@@ -1,7 +1,7 @@
 {
-  "name": "postage_app",
+  "name": "LawVidPennyA",
   "version": "0.3.0",
-  "description": "postal rates assignment",
+  "description": "Lawrence Video",
   "engines": {
     "node": "12.x",
     "npm": "6.14.8"
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/LawVidPennyA"
   },
   "keywords": [
     "node",
