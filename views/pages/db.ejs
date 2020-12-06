@@ -10,14 +10,14 @@
 <ul>
   Hello there!
     <% results.forEach(function(result) { %>
-        <li>
-            <%= result.title_id %> - 
-            <%= result.title_name %> -
-            <%= result.genre_id %> - 
-            <%= result.media_type_tv %> - 
-            <%= result.media_type_film %> - 
-            <%= result.media_type_other %>
-          </li>
+      <li>
+          <%= result.title_id %> - 
+          <%= result.title_name %> -
+          <%= result.genre_id %> - 
+          <%= result.media_type_tv %> - 
+          <%= result.media_type_film %> - 
+          <%= result.media_type_other %>
+      </li>
     <% }); %>
     <% results.forEach(function(result_genre) { %>
       <li>
