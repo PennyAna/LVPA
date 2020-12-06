@@ -21,14 +21,14 @@
     <% }); %>
     <% results.forEach(function(result_genre) { %>
       <li>
-        <% result_genre.genre_id %> - 
+        <%= result_genre.genre_id %> - 
         <%= result_genre.genre_name %>
       </li>
     <% }); %>
     <% results.forEach(function(result_user) { %>
       <li>
-        <% result_user.username %> - 
-        <% result_user.password %>
+        <%= result_user.username %> - 
+        <%= result_user.password %>
       </li>
     <% }); %>
 </ul>
