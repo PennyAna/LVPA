@@ -16,13 +16,13 @@ app.get('/postage', function (req, res) {
 app.get('/db', async function(req, res) {
     try {
         const client = await pool.connect();
-        const result = await client.query('SELECT * FROM media_table');
+        const result_media = await client.query('SELECT * FROM media_table');
         const result_genre = await client.query('SELECT * FROM genre_table');
         const result_user = await client.query('SELECT * FROM login_table');
         const results = { 
-            'results': (result) ? result.rows: null,
-            'result_genre': (result_genre) ? result_genre.rows: null, 
-            'result_user': (result_user) ? result_user.rows: null};
+            'results_media': (result_media) ? result_media.rows: null,
+            'results_genre': (result_genre) ? result_genre.rows: null, 
+            'results_user': (result_user) ? result_user.rows: null};
         res.render('pages/db.ejs', results);
         client.release();
     } catch (err) {
