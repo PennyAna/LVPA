@@ -17,11 +17,12 @@ app.get('/db', async function(req, res) {
     try {
         const client = await pool.connect();
         const result = await client.query('SELECT * FROM media_table');
-        const results = { 'results': (result) ? result.rows: null};
         const result_genre = await client.query('SELECT * FROM genre_table');
-        results.append( { 'genre results': (result_genre) ? result_genre.rows: null});
         const result_user = await client.query('SELECT * FROM login_table');
-        results.append( { 'user results': (result_user) ? result_user.rows: null});
+        const results = { 
+            'results': (result) ? result.rows: null,
+            'genre results': (result_genre) ? result_genre.rows: null, 
+            'user results': (result_user) ? result_user.rows: null};
         res.render('pages/db.ejs', results);
         client.release();
     } catch (err) {
