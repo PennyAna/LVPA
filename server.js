@@ -22,7 +22,7 @@ app.get('/db', async function(req, res) {
         const results2 = { 'results2': (result2) ? result2.rows: null};
         const result3 = await client.query('SELECT * FROM login_table');
         const results3 = { 'results3': (result3) ? result3.rows: null};
-        res.render('pages/db.ejs', results);
+        res.render('pages/db.ejs', results1, results2, results3);
         client.release();
     } catch (err) {
         console.error(err);
