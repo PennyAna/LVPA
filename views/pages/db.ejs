@@ -9,29 +9,28 @@
 <h2>Database Results</h2>
 <ul>
   Hello there!
-  <% results.forEach(function(r) { %>
-    <% r.forEach(function(results_media) { %>
-      <li>
-          <%= results_media.title_id %> - 
-          <%= results_media.title_name %> -
-          <%= results_media.genre_id %> - 
-          <%= results_media.media_type_tv %> - 
-          <%= results_media.media_type_film %> - 
-          <%= results_media.media_type_other %>
-      </li>
-    <% }); %>
-    <% r.forEach(function(results_genre) { %>
-      <li>
-        <%= results_genre.genre_id %> - 
-        <%= results_genre.genre_name %>
-      </li>
-    <% }); %>
-    <% r.forEach(function(results_user) { %>
+  <% results.forEach(function(results_media) { %>
+    <li>
+      <%= results_media.title_id %> - 
+      <%= results_media.title_name %> -
+      <%= results_media.genre_id %> - 
+      <%= results_media.media_type_tv %> - 
+      <%= results_media.media_type_film %> - 
+      <%= results_media.media_type_other %>
+    </li>
+  <% }); %>
+  <% results.forEach(function(results_genre) { %>
+    <li>
+      <%= results_genre.genre_id %> - 
+      <%= results_genre.genre_name %>
+    </li>
+  <% }); %>
+  <% results.forEach(function(results_user) { %>
       <li>
         <%= results_user.username %> - 
         <%= results_user.password %>
       </li>
-    <% }); });%>
+    <% s});%>
 </ul>
 </div>
 </body>

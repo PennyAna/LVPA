@@ -25,6 +25,7 @@ app.get('/db', async function(req, res) {
             'results_user': (result_user) ? result_user.rows: null};
         res.render('pages/db.ejs', results);
         client.release();
+        console.log(results);
     } catch (err) {
         console.error(err);
         res.send("Error " + err);
