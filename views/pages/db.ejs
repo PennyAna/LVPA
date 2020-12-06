@@ -10,9 +10,15 @@
 
 <ul>
   Hello there!
-    <% results.forEach(function(r) { %>
+    <% results1.forEach(function(r) { %>
         <li><%= r.id %> - <%= r.name %></li>
     <% }); %>
+    <% results2.forEach(function(r) { %>
+      <li><%= r.id %> - <%= r.name %></li>
+  <% }); %>
+  <% results3.forEach(function(r) { %>
+    <li><%= r.id %> - <%= r.name %></li>
+<% }); %>
 </ul>
 
 </div>
