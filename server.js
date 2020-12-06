@@ -24,6 +24,26 @@ app.get('/db', async function(req, res) {
         console.error(err);
         res.send("Error " + err);
     }
+    try {
+        const client = await pool.connect();
+        const result_genre = await client.query('SELECT * FROM genre_table');
+        const results_genre = { 'genre results': (result_genre) ? result_genre.rows: null};
+        res.render('pages/db.ejs', results_genre);
+        client.release();
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+    try {
+        const client = await pool.connect();
+        const result_iser = await client.query('SELECT * FROM login_table');
+        const results_user = { 'user results': (result_user) ? result_user.rows: null};
+        res.render('pages/db.ejs', results_user);
+        client.release();
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
 })
 const {Pool} = require('pg');
 const pool = new Pool({

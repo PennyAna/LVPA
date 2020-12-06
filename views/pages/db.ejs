@@ -7,7 +7,6 @@
 <% include ../partials/nav.ejs %>
 <div class="container">
 <h2>Database Results</h2>
-
 <ul>
   Hello there!
     <% results.forEach(function(r) { %>
@@ -21,7 +20,24 @@
           </li>
     <% }); %>
 </ul>
-
+<ul>
+  Hello there!
+    <% results_genre.forEach(function(r) { %>
+        <li>
+            <%= r.genre_id %> - 
+            <%= r.genre_name %> 
+          </li>
+    <% }); %>
+</ul>
+<ul>
+  Hello there!
+    <% results_login.forEach(function(r) { %>
+        <li>
+            <%= r.username %> - 
+            <%= r.password %> 
+          </li>
+    <% }); %>
+</ul>
 </div>
 </body>
 </html>
