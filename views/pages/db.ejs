@@ -9,15 +9,27 @@
 <h2>Database Results</h2>
 <ul>
   Hello there!
-    <% results.forEach(function(r) { %>
+    <% results.forEach(function(results) { %>
         <li>
-            <%= r.title_id %> - 
-            <%= r.title_name %> -
-            <%= r.genre_id %> - 
-            <%= r.media_type_tv %> - 
-            <%= r.media_type_film %> - 
-            <%= r.media_type_other %>
+            <%= results.title_id %> - 
+            <%= results.title_name %> -
+            <%= results.genre_id %> - 
+            <%= results.media_type_tv %> - 
+            <%= results.media_type_film %> - 
+            <%= results.media_type_other %>
           </li>
+    <% }); %>
+    <% results.forEach(function(results_genre)) { %>
+      <li>
+        <% results_genre.genre_id %> - 
+        <%= results_genre.genre_name %>
+      </li>
+    <% }); %>
+    <% results.forEach(function(results_user)) { %>
+      <li>
+        <% results_user.username %> - 
+        <% results_user.password %>
+      </li>
     <% }); %>
 </ul>
 <ul>
