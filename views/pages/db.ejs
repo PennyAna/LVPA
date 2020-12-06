@@ -9,26 +9,26 @@
 <h2>Database Results</h2>
 <ul>
   Hello there!
-  <% results.forEach(function(results_media) { %>
+  <% results.results_media.forEach(function(r) { %>
     <li>
-      <%= results_media.title_id %> - 
-      <%= results_media.title_name %> -
-      <%= results_media.genre_id %> - 
-      <%= results_media.media_type_tv %> - 
-      <%= results_media.media_type_film %> - 
-      <%= results_media.media_type_other %>
+      <%= r.title_id %> - 
+      <%= r.title_name %> -
+      <%= r.genre_id %> - 
+      <%= r.media_type_tv %> - 
+      <%= r.media_type_film %> - 
+      <%= r.media_type_other %>
     </li>
   <% }); %>
-  <% results.forEach(function(results_genre) { %>
+  <% results.results_genre.forEach(function(r) { %>
     <li>
-      <%= results_genre.genre_id %> - 
-      <%= results_genre.genre_name %>
+      <%= r.genre_id %> - 
+      <%= r.genre_name %>
     </li>
   <% }); %>
-  <% results.forEach(function(results_user) { %>
+  <% results.results_user.forEach(function(r) { %>
       <li>
-        <%= results_user.username %> - 
-        <%= results_user.password %>
+        <%= r.username %> - 
+        <%= r.password %>
       </li>
     <% s});%>
 </ul>
