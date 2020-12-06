@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>CS 313 - Preparation Material</title>
+  <link rel="stylesheet" type="text/css" href="../course/css/style.css"/>
+</head>
+
+<body>
+
+<header id="courseTitle">
+  <span class="icon-byui-logo"></span>
+  <h1>CS 313 | Web Engineering II</h1>
+</header>
+
+<article>
+
+  <h2>05 Prepare : Querying from PHP</h2>
+
+  <h3>Connecting to Postgres from PHP</h3>
+  <p>This document covers the very basics of querying data contained in our Postgres database from PHP. It is not intended to be exhaustive, but rather to help you get started so you can then turn to tutorials and examples on the Internet with more context.</p>
+
+  <p>Using PDO, the syntax for connecting to a database is</p>
+
+  <p>
+  <pre>$db = new PDO("pgsql:host=your_host_name;port=your_database_port;dbname=your_database_name", your_user_name, your_password);</pre>
+  </p>
+
+  <p>And if the connection attempt fails, it will throw an exception.</p>
+
+  <p>If you were connecting to a database hosted on your own computer, you could use something like:</p>
+
+  <pre><code class="php">
+try
+{
+  $user = 'postgres';
+  $password = 'password';
+  $db = new PDO('pgsql:host=localhost;dbname=myTestDB', $user, $password);
+
+  // this line makes PDO give us an exception when there are problems,
+  // and can be very helpful in debugging! (But you would likely want
+  // to disable it for production environments.)
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $ex)
+{
+  echo 'Error!: ' . $ex->getMessage();
+  die();
+}
+</code></pre>
+
+  <h4>Connecting to Databases at Heroku</h4>
+
+  <p>Heroku automatically creates an environment variable <code>DATABASE_URL</code> for the admin Postgres user and its password, along with the hostname and port of the database instance.</p>
+
+  <p>You can access this environment variable in PHP and parse it.</p>
+
+  <pre><code class="php">
+try
+{
+  $dbUrl = getenv('DATABASE_URL');
+
+  $dbOpts = parse_url($dbUrl);
+
+  $dbHost = $dbOpts["host"];
+  $dbPort = $dbOpts["port"];
+  $dbUser = $dbOpts["user"];
+  $dbPassword = $dbOpts["pass"];
+  $dbName = ltrim($dbOpts["path"],'/');
+
+  $db = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPassword);
+
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $ex)
+{
+  echo 'Error!: ' . $ex->getMessage();
+  die();
+}
+
+</code></pre>
+
+  <p>Please note that the above code gets these values from the Heroku environment variable. You can essentially copy and paste it and use it as is. You do not need to replace the values in that code with your actual values. For example:</p>
+
+  <pre><code class="php">
+# You SHOULD do this:
+$dbUrl = getenv('DATABASE_URL');
+
+# You SHOULD NOT do this:
+$dbUrl = getenv('postgres://fqhkwvxsdfhjejha:0809144c3cc00ba237ac0ceed358da673e39c7c3a291e5403f954bf04adc9cf@ec2-23-23-130-158.compute-1.amazonaws.com:5432/d387pkr4ml56re9');
+</code></pre>
+<pre><code class="php">
+# You SHOULD do this:
+$dbUser = $dbOpts["user"];
+
+# You SHOULD NOT do this:
+$dbUser = $dbOpts["fqhkwvxsdfhjejha"];
+</code></pre>
+
+
+  <div class="tips">
+    <p>Instructor Tip</p>
+    <p>If you are trying to work with your PHP pages using a local server environment, and then push them to Heroku, you will have two different databases that you need to keep in sync. Then, you'll also have to change your code to connect to them at the appropriate time (i.e., connect to the localhost database when your page is running at localhost, but connect to the Heroku database when it is running at Heroku). This can be a little bit tricky, but one appraoch is described <a href="./prepare-heroku-connect.html" target="_blank">here</a>.</p>
+
+  </div>
+
+<h3>Issuing Queries</h3>
+
+  <p>Once you have a connection, you can then issue queries.</p>
+
+  <pre><code class="php">
+foreach ($db->query('SELECT username, password FROM note_user') as $row)
+{
+  echo 'user: ' . $row['username'];
+  echo ' password: ' . $row['password'];
+  echo '&lt;br/&gt;';
+}
+</code></pre>
+
+  <p>or</p>
+
+  <pre><code class="php">
+$statement = $db->query('SELECT username, password FROM note_user');
+while ($row = $statement->fetch(PDO::FETCH_ASSOC))
+{
+  echo 'user: ' . $row['username'] . ' password: ' . $row['password'] . '&lt;br/&gt;';
+}
+</code></pre>
+
+  <p>or</p>
+
+  <pre><code class="php">
+$statement = $db->query('SELECT username, password FROM note_user');
+$results = $statement->fetchAll(PDO::FETCH_ASSOC);
+</code></pre>
+
+  <h3>Using Prepared Statements</h3>
+
+  <p>As mentioned, one of the strengths of PDO is the ease of using prepared statements to help you avoid SQL
+    injection.</p>
+
+  <pre><code class="php">
+$stmt = $db->prepare('SELECT * FROM table WHERE id=:id AND name=:name');
+$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+$stmt->execute();
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+</code></pre>
+
+  <p>or</p>
+
+  <pre><code class="php">
+$stmt = $db->prepare('SELECT * FROM table WHERE id=:id AND name=:name');
+$stmt->execute(array(':name' => $name, ':id' => $id));
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+</code></pre>
+
+  <h3>Using an Admin User</h3>
+
+  <p>As a final note, using the Heroku variable will have you using the Admin user for your database, which is not the best thing to do from a security standpoint. It is the simplest thing to get working, and I would recommend starting there. At this point, you likely have enough other things to worry about with your projects.</p>
+  <p>But if you want to do it "the right way", you would need to create your own DB user and create the environment variables you need for it. This can be a little bit complicated, but can be done either by using the Heroku CLI, or by adding a hook to your commit process. If any decide to dive into this, please post your findings to the course discussion.</p>
+
+</article>
+
+<script src="../course/js/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+
+</html>

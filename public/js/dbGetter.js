@@ -1,0 +1,1 @@
+/* get entries from media/genre/login tables for view/edit/delete/check authorizations*/

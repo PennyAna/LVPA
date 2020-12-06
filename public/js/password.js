@@ -1,0 +1,1 @@
+/* accepts password (login or sign up) and hashes/salts or unhashes/unsalts */
