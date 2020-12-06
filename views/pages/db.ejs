@@ -19,16 +19,16 @@
           <%= result.media_type_other %>
       </li>
     <% }); %>
-    <% results.forEach(function(results_genre) { %>
+    <% results.forEach(function(result_genre) { %>
       <li>
-        <%= results_genre.genre_id %> - 
-        <%= results_genre.genre_name %>
+        <%= result_genre.genre_id %> - 
+        <%= result_genre.genre_name %>
       </li>
     <% }); %>
-    <% results.forEach(function(results_user) { %>
+    <% results.forEach(function(result_user) { %>
       <li>
-        <%= results_user.username %> - 
-        <%= results_user.password %>
+        <%= result_user.username %> - 
+        <%= result_user.password %>
       </li>
     <% }); %>
 </ul>
