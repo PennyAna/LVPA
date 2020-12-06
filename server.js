@@ -22,7 +22,8 @@ app.get('/db', async function(req, res) {
         const results_genre = { 'genre results': (result_genre) ? result_genre.rows: null};
         const result_user = await client.query('SELECT * FROM login_table');
         const results_user = { 'user results': (result_user) ? result_user.rows: null};
-        res.render('pages/db.ejs', results, results_genre, results_user);
+        const total_results = results + results_genre + results_user;
+        res.render('pages/db.ejs', total_results);
         client.release();
     } catch (err) {
         console.error(err);
