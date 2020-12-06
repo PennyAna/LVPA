@@ -29,15 +29,6 @@ app.get('/db', async function(req, res) {
         console.error(err);
         res.send("Error " + err);
     }
-    try {
-        const client = await pool.connect();
-        
-        res.render('pages/db.ejs', results_user);
-        client.release();
-    } catch (err) {
-        console.error(err);
-        res.send("Error " + err);
-    }
 })
 const {Pool} = require('pg');
 const pool = new Pool({
