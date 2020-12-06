@@ -9,7 +9,7 @@
 <h2>Database Results</h2>
 <ul>
   Hello there!
-  <% results.results_media.forEach(function(r) { %>
+  <% results_media.forEach(function(r) { %>
     <li>
       <%= r.title_id %> - 
       <%= r.title_name %> -
@@ -19,13 +19,13 @@
       <%= r.media_type_other %>
     </li>
   <% }); %>
-  <% results.results_genre.forEach(function(r) { %>
+  <% results_genre.forEach(function(r) { %>
     <li>
       <%= r.genre_id %> - 
       <%= r.genre_name %>
     </li>
   <% }); %>
-  <% results.results_user.forEach(function(r) { %>
+  <% results_user.forEach(function(r) { %>
       <li>
         <%= r.username %> - 
         <%= r.password %>
