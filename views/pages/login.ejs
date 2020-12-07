@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include partials/header %>
+    <div class="container">
+        <div id="login-box" class="row col-md-4 offset-md-4">
+            <div class="account-wall">
+                <form class="form-signin" action="login.ejs" method="POST">
+                    <input type="text" name="username" class="form-control" placeholder="Email" required autofocus>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <input type="checkbox" name="remember" placeholder="Remember Me">Remember Me
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+                <span></span>
+                <a href="join.ejs" class="text-center new-account">Create an account</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <% include partials/footer %>
+</body>
+</html>

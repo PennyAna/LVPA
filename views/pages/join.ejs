@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include partials/header %>
+        <div class="container">
+            <div id="login-box" class="row col-md-4 offset-md-4">
+                <div class="account-wall">
+                    <form class="form-signup" action="join.ejs" method="POST">
+                        <input type="text" name="first_name" class="form-control" placeholder="First name" autofocus>
+                        <input type="text" name="last_name" class="form-control" placeholder="Last name">
+                        <input type="text" name="user_name" class="form-control" placeholder="Email">
+                        <input type="password" name="password" class="form-control" placeholder="First name">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Join</button>
+                    </form>
+                    <span></span>
+                    <a href="login.ejs" class="text-center new-account">Already have an account? Sign in.</a>
+                </div>
+            </div>
+    </div><br>
+    <% include partials/footer %>
+</body>
+</html>
