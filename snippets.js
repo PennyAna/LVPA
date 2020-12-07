@@ -1,9 +1,3 @@
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require(' bcrupt');
-const uuidv4 = require('uuid/v4');
-
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/')));
